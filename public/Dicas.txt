@@ -1,0 +1,525 @@
+==== Aula 1 ====
+https://www.figma.com/ - serve para criação de Layouts
+https://www.notion.so/ - serve para anotações em grupo
+https://pt.piliapp.com/facebook-symbols/ - serve para encontrar emojis do facebook
+
+Considerações - CSS
+O CSS linka tags com estilos por meio de seletores
+
+Considerações do JavaScript
+Tudo no JavaScript é um objeto, um objeto tem atributo,  propriedades e funcionalidades.
+ Como para o JavaScript tudo é um objeto o HTML não será exceção, para termos acesso 
+ ao documento HTML no JavaScript, é necessário usar um objeto chamado "Document" para
+ acessar as propriedades e funcionalidades desse objeto use o "." com isso uma lista
+ ENORME irá aparecer. 
+
+ Para encontrarmos o botão "fat" no exemplo da aula um, temos que usar a seguinte expressão:
+
+
+         document
+            .querySelector("button.fat") - query (pesqueisa) Selector (CSS\Tag HTML) encontramos o botão fat
+            .addEventListener("click", function(){ - Escuta o evento Click, do botão que esta no documento
+
+                -Aqui temos o código da function, ou seja, a funcionalidade que é sumir\aparecer o ID footer
+                document - precisamos pesquisar o footer igual feito no botão "fat"
+                    .querySelector("#footer")
+                    .classList - onde se encontra o footer será adicionado a partir de uma função chamada toogle uma classe chamada "hide"
+                    .toggle("hide") - toogle quer dizer "colocar e tirar"
+
+            })
+
+
+==== Aula 2 REFATORANDO ====
+https://www.flaticon.com/ - para obter icons de qualidade
+https://css-tricks.com/ - para obter várias dicas com o CSS 
+
+Nesta aula vamos refatorar o código, ou seja, separar ele em arquivo CSS, JS, identar 
+e etc. Essa parte será o primeiro passo da refatoração. 
+
+vamos agora incrementar o layout, aqui entendemos que cada elemento esta agrupado de uma
+forma e com um estilo aplicado, resumindo tudo no CSS é uma BOX(caixa).
+
+Dentro de uma Box existe conteúdo que pode ser textou até mesmo outra Box
+
+Dentro do CSS temos o conceito de Box Model, dentro do desse conceito temos:
+Margin, Border, Padding e o conteúdo
+
+Vamos trabalhar 
+    -Altura (Heigth)
+    -Bordas
+    -Conteúdo da caixa
+    -Espaçamentos (Margin)
+    -Largura (max-width)
+    -Preenchimento (Padding)
+    -Posicionamento (display:flex)
+        -o position permite usar o display:
+         -position: fixed; (preso na pagina)
+         -position: bsolute; (fica solto na pagina liberando coisas como TOP,Down
+          ,Right e left)
+
+Dicas - para configurar um container
+
+width: vw - toda área da largura visível da sua tela
+heigth: vh - toda área da altura visível da sua tela;
+
+px - é uma unidade fixa
+% - é uma unidade de ajuste
+No caso usamos sempre o px para definir tamanho máximo e a porcentagem para ajustar o 
+tamanho o conteúdo caso seja menor que o limite
+
+A ALTURA de um container é uma ideia de algo automático, pois, caso o contrário o conteúdo
+interno pode transbordar, MAS, mesmo assim é possivel por um "tampa" na caixa com o código
+"OVERFLOW: hiden;" com esse código todo o conteúdo da caixa vai respeitar somento o que foi
+definido no "heigth". Porém, o comportamento padrão é transbordar da caixa
+
+Posicionamento (display:flex)
+Ao usar o "display:flex", dizemos ao programa que ele dever posicionar o elementos filhos
+em linha. No nosso caso container é pai das duas sections que criamos (intro ,last-ideias)
+
+justify-content - só funciona com o display: flex, grid ou alguns outros tipos de display.
+(distribui o conteúdo da FlexBox, no eixo "x")
+justify-content: space-evenly;
+
+aling-items:center - só funciona com o display:flex
+(distribui o conteúdo da FlexBox, no eixo "Y")
+
+align-self:end - só funciona como grid
+(distribui a grid, no eixo "Y")
+
+justify-self: start - só funciona como grid
+(distribui a grid, no eixo "X")
+
+
+=== Comentário da auala 4 ====
+position: absolute; + o Scroll
+faz com que o position: absolute comece zerado no top:0; Left; 0 gerando erro quando a página
+ficava rolada para baixxo e clicando em nova ideia, em telas grandes. Já com o position: fixed;
+o modal fica estampado na tela indiferente do Scroll ou tamanho da tela.
+
+box-shadow - x y blur espalhamento (o box-shadow funciona com o border-radius)
+
+
+1hr 07min - Crição do formulário
+
+Para que serve o formulário? 
+R: para adicionar campos que vão enviar dados pelo html para o servidor
+
+*
+Por padrão o css soma widht com o padding por isso aluns Grids podem encavalar como ocorreu
+na aula, esse padrão se encontra no seletor box-sizing:content-box, temos que mudar a 
+propriedade para box-sizing:border-box
+*
+
+==== Aula 3 REFATORANDO Concluindo layout ====
+Vamos criar uma nova pagina, e aproveitar recursos da pagina anterior
+
+Vamos trabalhar 
+    -listas (li) - Dica li*3>a, esse comando cria 3 itens com 3 links
+    -menu de navegação (nav)
+    -Overflow: hidden; - retira a barra de rolagem
+
+
+Inserimos a Tag NAV no header, para colcoar os itens do Menu
+Tag nav, é uma tag semantica para quando há menus na página (quer dizer navegation)
+
+Foi dito que só podemos usar um ID por elemento, mas, como estamos em uma página nova
+podemos reutiliza-lo o que quer dizer que podemos aproveitar o que já foi feito no CSS.
+
+Quando tempos uma pagina baseada em outra, a configuração global pode te dar trabalho
+,pois, os elementos de uma de algumas sections ou containers podem não ser os mesmos
+e dessa forma o CSS, vai "desconfigurar" a página. Para resolver esse problema é interessante
+que dentro da TAG Body, seja criado um ID ou uma Classe com o mesmo nome da página, e assim
+dentro do documento CSS você possa referenciar determinados elementos de acordo com suas 
+camadas/pagians. Exemplo: 
+
+#page-ideas #container
+
+É interessante usar configurações globais para largura, Espaçamentos e altura, mas, não para
+o Posicionamento, pois, esse varia muito e pode quebrar a página. Sendo assim, como exeplicado
+a cima para configurar globalmente um #container é interessante usar largura, Espaçamentos e 
+altura, mas, para configurar seu posicionamento é bom usar a força das camadas
+
+Ao ajustarmos o modal na segunda parte do site, fizemos o básico, mas, surgiu um assunto
+de responividade que serve para melhorar os ajustes esse assunto não será tratado mas,
+tem video gratuito no site da RocketSeat falando disso. - PROCURAR
+
+Fizemos um classe Button, e referenciamos ela nas duas pagians criadas. Qual é a importância?
+R: vimos acima a importância de separar o código de forma global para o reaproveitamento do mesmo
+só que a ideia ficou por conta do atributo ID. A importância de uma classse se dá pelo motivo de que
+o ID referência o elemento HTML e a Classe um Objeto, por tanto, é provável que existam muitos botões
+no seu site e você precise reaproveitar o código do botão em cada uma delas, já na página só vai exisir 
+um único Body com um único ID, contúdo, isso não quer dizer que ele não se aproveite de uma 
+configuração global, ou seja, ele pode muito bem usar uma configuração Global, mas, o seu propósito
+vai ser referenciar a força do CSS na pagina HTML quanto que a Classe vai referenciar a força do objeto
+no código HTML
+
+Problemas que vamos ver na aula 4 
+    -Como repetir códigos em mais paginas, por exemplo, se nosso código tivesse 100 paginas
+    como iriamos alterar o link do footer em todas elas?
+    
+    -Criar servidor para não depender somente do VisualStudio Code
+    
+
+==== Aula 4 BackEnd ====
+
+shift alt a - /*  */ abre multipo comentário, se selecioanr tudo e apertar isso comenta tudo
+
+
+Responsabilidades
+    -Frondend - Responsável por APRESENTAR as coisas HTML, CSS, dados para nós, porém, os 
+    dados devem vir de outro lugar, não é responsabildiade do Frondend por exemplo aramzenar
+    os dados ou lidar com as regras de negócio
+
+    -Então oque é responsabildiade do BackEnd? 
+
+        -Receber pedidos do cliente
+            -Por exemplo, pesquisar umsite no google;
+ 
+        -Regras do negócio
+            -Devolver respostas para o Cliente, por exmeplo, não foi possível cadastrar CPF,
+            pois, o cadastro já existe;;
+        
+        -Dados
+            -Tratamento de dados, por exemplo, receber um CPF com traços e pontos e 
+            remove-los para guardar(PERSISTIR) como numero  no banco de dados;
+
+Tecnologias utilizadas
+    -Node.js
+    -Banco de dados
+
+--- Vamos criar um Servidor ---
+
+-Crie um arquivo chamado server.js
+-coloque a pasta da aplicação no C: para evitar erro de execução do Node
+se continuar erros mude o nome da pasta para SW
+
+-use o npm (para iniciar o projeto, configurar o projeto, instalar pacotes)
+comando usados:
+    -npm init -y (o Y serve para dar "yes" entudo)
+    -Apos o comando é criado um package.json na raiz do seu projeto. (Jason - JavaScript Objetc Notation)
+     -para inicar um projeto usamos o comando npm start e ele vai executar a linha "start": "node server.js"
+      do pakage.json
+
+O que fazer agora para Criar o servidor? 
+    -Executer o comando npm i express 
+    -será criada uma pasta chamada "node_modules" e lá terá todas as dependencies da biblioteca express
+    -A linha dependencies é criada no seu package.json e é incluido nela a biblioteca express
+    -Agora é necessário adicionar o express na aplicação dentro do arquivo server.js
+        const express = require("express")
+        const server = express()
+        
+    -Agora, temos que usar a metodo listen
+        server.listen(3000) <- 3000 é a porta
+        
+    Acesse o localhost ou 127.0.0.1:3000
+    
+    Servidor configurado
+
+Nesse ponto não vemos nada no navegador somente a resposta "Cannot GET /", pois, o server
+não está respondendo função alguma, então, vamos configurar isso para que ele possa responder 
+essa requisição, nessa requisição temos uma função que tem dois parâmetros (req, res)
+
+        server.get("/",function(req,res){
+
+        }
+
+*essa configuração seguinifica que estamos configurando o Frondend com o BackEnd*
+
+PAra evitar de SEMPRE estartar o node podemos fazer:
+Para executar automaticamennte o "npm start" precisamos instalar o nodemon
+    -npm i nodemon
+
+    -abrir o package.json e trocar no script o "start": "node server.js" para
+     "start": "nodemon server.js"
+
+    -start start (vai executar a linha start do package.json)
+
+Sempre que eu mudar algo no meu arquivo server.js, o nodemon vai entender que houve modificação
+e reiniciar o servidor 
+
+
+Agora temos que trazer os arquivos do site para o navegador, mas, atenção o caminho do 
+arquivo deve ser absoluto para isso usamos o dirnname
+
+        return res.sendFile(__dirname + "/index.html")
+
+Além de trazer o index.html temos que trazer os demais aquivos, e para isso temos que configurar
+o express para achar a pasta que contém esses aquivos chamados de arquivos estáticos
+
+        server.use(express.static("public"))
+
+Dica: se possível sempre coloque uma / como padrão no arquivo HTML, por exemplo:
+
+        href="/style.css",
+pois, em alguns computadores a falta dessa barra pode causar alguns porblemas para chamar imagens
+
+
+
+O interessante é criar rotas, ao invez de jogar o arquivo todo no navegador para isso: 
+usamos o seguitne código:
+
+server.get("/",function(req,res){
+    return res.sendFile(__dirname + "/index.html")
+})
+
+server.get("/ideias",function(req,res){ <- nessa linha veja que criamos uma rota "/ideias" para o 
+                                            arquivo ideias.html, o mesmo foi feito para o index.html
+    return res.sendFile(__dirname + "/ideias.html")
+})
+
+
+55 min - aprendemos a executar o servidor sem estar com o VisualStudioCode aberto deixei um JPEG,
+mostrando a diferença no arquivo json. 
+
+    "start": "node server.js",
+    "dev": "nodemon server.js"
+
+Nome do JPEG é "Configurando Server". Comando para inicar o server sem o VisualStudioCode é 
+"npm start" ou "npm dev run" no seu PowerShell
+
+
+Na estratégia do BackEnd, o servidor reinderiza o HTML e joga o conteúdo no Frondend mas ele não 
+só reinderiza ele ambém trata os dados em algum lugar mais zeguro com o banco de dados (vamos ver amanhã).
+Essa reinderização permite que o conteúdo da pagina HTML não seja mais estática, ou seja, os 
+dados da pagina serão dinâmicos, aquilo que temos nos grids, não estarão mais presente no index.HTML
+e sim, em algum outro lugar do BackEnd, trabalhar dessa forma permite resolver o seguinte problema:
+
+    -Como repetir códigos em mais paginas, por exemplo, se nosso código tivesse 100 paginas
+    como iriamos alterar o link do footer em todas elas?
+
+Vamos tratar essa questão com a seguinte estratégia no BackEnd. O que vamos fazer nessa questão
+é instalar um pacote chamado NUNJUCKS
+
+-npm i nunjucks (instala o nunjucks)
+
+O que é o nunjucks?
+Ele é quem vai permitir com que a gente use variáveis no nosso HTML, já que o HTML normal não 
+permite usar variáveis. O nunjunks é uma template engine(motor que complia o código) que permite 
+organizar e manipular os conteúdos HTML
+
+//configuração do nunjucks
+//recebemos aqui o objeto nunjucks
+const nunjucks = require("nunjucks")
+nunjucks.configure("views", { <-"views" é a pasta que o nunjucks vai enxergar, onde vão ficar os nosso HTMLs
+    //vamos falar que o express é o nosso servidor para o nunjucks
+    express:server,
+})
+
+Essa parte 
+server.get("/",function(req,res){
+    return res.sendFile(__dirname + "/index.html")
+})
+
+server.get("/ideias",function(req,res){
+    return res.sendFile(__dirname + "/ideias.html")
+})
+
+Temos que mudar para render já que o nunjucks está fazendo isso com o arquivo HTML na pasta views
+e temos também que mudar o caminho "__dirname" já que ele não está mais na raiz do projeto o caminho:
+
+esta mudado o caminho "__dirname" aqui: 
+
+nunjucks.configure("views", {
+
+alinha ficaria assim:
+    return res.render("index.html")
+
+Ao fazer qualquer alteração no PRESENTE momento tivemos um problema pois, "faltou" uam configuração
+A configuração em questão é "noCache: true". Essa configuração de cache faz com que o nunjuck 
+julgue o que é importnate e permita ele guardar dados em memória para usar mais tarde, ou seja,
+ao invés dele atualizar toda a aplicação, só parte dela será atualizada, no nosso caso o o nosso
+CSS estava em cache e tivemos que reinicar a aplicação. O cache é bom quando o sistema esta 
+finaizado pois, ele vai deixar tudo mais rápido mas, no momento de desenvolvimento não é legal.
+
+  noCache: true,
+
+
+Vamos configurar variáveis no para serem passadas ao HTML e tornar o conteúdo dinâmico. Essas 
+variáveis devem ser feitas no BackEnd (no caso atual, o arquivo server.js), e passadas para o
+HTML. Nesse caso usamos coisas que já sabemos como "Const, Let" (como um vetor das ideias que já 
+existem) e, agora, para colocar variáveis no HTML usamos o {{}}, apra colcoar um "for" usamos
+o  {% for idea in ideias %} por exemplo e para fecha-lo {% endfor %}
+
+
+Para não ficar repetindo o modal tambem segue a lógica do nunjucks, ondne o caminho esta
+configurado, ou seja, criamos um arquivo chamado modal na pastas views e colocamos o código
+HTML lá, depois só referenciamos nas paginas index e ideias com o seguinte código:
+
+{% include "modal.html" %}
+
+Com o conteúdo da section (ideas) também
+Com o head também
+
+
+
+Revisão 
+    -vimos como separar ideias do nunjucks, com:
+        -include
+        -block
+        -variáveis
+        -extends (extendemos o layout toda vez que usarmos o block)
+        -Essas ideias de separação, permitem configurar 100 páginas desde que as variáveis estejam
+         nos lugares certos
+
+    -vimos como fazer estruturas de repetição (all_ideas, for)
+    
+    -separamos conteúdos
+
+    -Criamos servidores
+    -Criamos rotas
+    -Trabalhamos a lógica de programação (regras do negócio com o reverse)
+
+
+
+
+Probelmas que vamos ver nas próximas aulas:
+
+-Ná próxima aula vamos adicionar os nosso dados em um banco de dados 
+
+==== Aula 5 BackEnd ====
+
+Por que usar banco de dados? 
+R: porque a responsabildiade do Frondend é apenas exibir os dados e não guarda-los sem dizer 
+que um banco de dados faz diversas tratativas nos dados como, persistir eles em um local seguro
+e promove um pouco mais de segurança com métodos de autenticação e etc.
+
+Vamos usar o sqlite3, segue comando para instalar:
+
+npm i sqlite3
+
+vamos criar o arquivo db.js, é nesse arquivo que teremos a configuração do nosso banco de dados
+
+Dicas:
+-O SQL tem MUITO erro de escrita e é um pouco complexo de achar esses erros, então, preste 
+MUITA atenção na sintaxe.
+
+-Para executar o banco de dados use:
+    node db.js ( no terminal )
+
+-Para verificar se suas operações no db deram certos usee a função "function(err)"
+a função muda com o tipo de metodo associado ao objeto, por exemplo, o metodo "all" no 
+objeto db chama a função CallBack com "err e rows"
+    \\esta função é para deletar
+    function(err){
+        if (err) return console.log(err)
+
+        console.log("DELETEI", this)
+    }
+    
+-CallBack é uma função que passa dentro de outra função
+
+-Para chamar o db dentro da aplicação, temos que exportar dentro do db.js
+     module.exports = db
+
+    -Para chamar o db exportado na aplicação,no arquivo server.js faça:
+     const db = require ("./db.js")
+
+-no exercício tivemos um erro do qual a aplicação não devolvia a imagem corretamente no grid,
+isso aconteceu devido a variável do nunjuck não ter o mesmo nome que a coluna do banco de dados
+a variável idea.img deveria estar escrita da sequinte forma, idea.image e o idea.url como 
+idea.link
+
+
+SQL - POST
+
+Os campos "name" do formulário (modal), são passados pela URL. Podemos pegar todos os campos
+com a requisição server.GET("/",function(req,res), através do "req". 
+Esse req, tem dentro dele as requisições do usuário e uma dessa requisições é a req.querry
+e nela podemos pegar tudo que tem no "?" da URL, por exemplo,
+"?title=blablabla&category=blablabla&"
+Usamos essa idea de passar os dados na URL para filtrar conteúdo, ou alguma outra estratégia, 
+como paginação. Mas, para guardar dados usamos o POST
+
+Aqui vemos:
+    // no arquivo server.js
+    server.GET("/",function(req,res)
+
+    //form da pagina modal.html
+    <form action="/"> 
+
+quando não colocamos o "method" no form ele entende que vamos usar o GET por padrão, action=""
+vai para página nenhuma
+
+agora vamos mudar isso para:
+
+<form action="/" method="POST" onsubmit="return checkFields(event) "> 
+
+para que funcione precisamos inserir
+    // no arquivo server.js
+    server.post("/", function(req, res)
+
+Aqui estamos criando uma rota tipo POST na raiz, no barra "/", assim como exite para o GET
+
+Para o method GET usavamos o req.querry, agora, para o method POST usamos o req.body, se 
+fossemos usar o req.querry os dados do POST seriam passados pela URL e não queremos isso,
+queremos que os dados do POST passe pelo BODY da requsição
+
+Para usar o method POST, precisamos também sar habilitar o uso dele :
+
+    //habilitar uso do req.bodyf
+    server.use(express.urlencoded({extended:true}))
+
+- VALUES (?,?,?,?,?); esse monte de interrogação se chama placeholders, serão subistituidos
+pelos values 
+
+VALIDAR PARA NÃO ENTRAR DADO VAIZO (validação via Frondend)
+
+<form action="/" method="POST" onsubmit="return checkFields(event) ">
+
+onsubmit chama nossa função 
+
+A função checkFields(event) vai verificar os campos do modal
+
+vamos entender o que é o event
+
+-ele é um objeto que tem vários parametros um dos parametros é o Targer:form. O form por sua 
+vez tem os nossos filds, como por exemplo, o title. Com o comando:
+    
+    //podemos ver o valor do title
+    console.log(event.title.value)
+
+com isso podemos orientar o programa, ou seja, se os filds do from estiverem com valor VAIZO
+podemos imperdir que o programa faça o "submit" de uma ideia (objeto) vazio.
+
+-Função
+//recebe o event
+function checkFields(event){
+
+-criamos então um objeto com todos os nosso filds:
+
+        const valuesToCheck = [
+        "title",
+        "image",
+        "category",
+        "description",
+        "link",
+        ]
+
+agora vamos criar uma variável para receber esses valores (valuesToCheck), e nessa variável
+teremos uma função (find) que vai enccontrar os valores dos filds(valuesToCheck) e uma função
+para verificar os tipos desses valores
+
+    -find: se o find retornar true quer dizer que ele encontrou alguma coisa
+           é um FOR. Para esse for 
+
+    const isEmpty = valuesToCheck.find(function(value){
+
+        //verificar o tipo do valor encontrado no fild, aqui "string" tem que estar escrito exatamente desse jeito senão ocorre erro
+        const checkIfIsString = typeof event.target[value].value === "string"
+
+        //.trim(), é aplicado a todas as strings e ele remove todos os espaços, ou seja, se alguem digita " " o trim remove isso retornando vazio ao invez de espaço em branco
+        const checkIfIsEmpty = !event.target[value].value.trim()
+
+            //se checkIfIsString for uma string E checkIfIsEmpty estiver vazio então retorna TRUE
+            //encontramos algo vazio
+            if (checkIfIsString && checkIfIsEmpty){
+                return true
+            }
+    }
+
+    if(isEmpty){
+        //preventDefault, impede o funcionamento padrão do "event" que esta associado ao onsubmit
+        event.preventDefault()
+            alert("Por favor, preencha todos os campos")
+    }
+}
